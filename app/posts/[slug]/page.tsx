@@ -3,6 +3,9 @@ import { getAllPosts, getPostBySlug, markdownToHtml } from '@/lib/api'
 import { formatDate } from '@/lib/utils'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import BackToTop from '@/components/BackToTop'
+import TableOfContents from '@/components/TableOfContents'
+import { Clock } from 'lucide-react'
 
 interface Props {
   params: { slug: string }
@@ -51,6 +54,15 @@ export default async function PostPage({ params }: Props) {
               <time dateTime={post.date}>
                 {formatDate(post.date)}
               </time>
+              {post.readTime && (
+                <>
+                  <span>·</span>
+                  <div className="flex items-center">
+                    <Clock className="h-4 w-4 mr-1" />
+                    <span>{post.readTime} 分钟阅读</span>
+                  </div>
+                </>
+              )}
               <span>·</span>
               <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded">
                 {post.category}
@@ -75,6 +87,8 @@ export default async function PostPage({ params }: Props) {
       </main>
 
       <Footer />
+      <BackToTop />
+      <TableOfContents content={post.content} />
     </div>
   )
 } 
