@@ -3,6 +3,8 @@ import { getAllPosts } from '@/lib/api'
 import { formatDate } from '@/lib/utils'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import BackToTop from '@/components/BackToTop'
+import { Clock } from 'lucide-react'
 
 export default function Home() {
   const posts = getAllPosts()
@@ -54,9 +56,17 @@ export default function Home() {
                       {post.excerpt}
                     </p>
                     <div className="flex items-center justify-between text-sm text-gray-500">
-                      <time dateTime={post.date}>
-                        {formatDate(post.date)}
-                      </time>
+                      <div className="flex items-center space-x-3">
+                        <time dateTime={post.date}>
+                          {formatDate(post.date)}
+                        </time>
+                        {post.readTime && (
+                          <div className="flex items-center">
+                            <Clock className="h-4 w-4 mr-1" />
+                            <span>{post.readTime}分钟</span>
+                          </div>
+                        )}
+                      </div>
                       <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded">
                         {post.category}
                       </span>
@@ -79,6 +89,7 @@ export default function Home() {
       </main>
 
       <Footer />
+      <BackToTop />
     </div>
   )
 } 

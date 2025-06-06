@@ -3,6 +3,8 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import SearchBar from './SearchBar'
+import { getAllPosts } from '@/lib/api'
 
 const navigation = [
   { name: '首页', href: '/' },
@@ -13,6 +15,7 @@ const navigation = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const posts = getAllPosts()
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -35,16 +38,20 @@ export default function Header() {
             </button>
           </div>
           
-          <div className="hidden lg:flex lg:gap-x-12">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600 transition-colors"
-              >
-                {item.name}
-              </Link>
-            ))}
+          <div className="hidden lg:flex lg:gap-x-8 lg:items-center">
+            <SearchBar posts={posts} />
+            
+            <div className="flex gap-x-6">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600 transition-colors"
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </nav>

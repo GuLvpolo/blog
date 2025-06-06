@@ -45,6 +45,11 @@ export default function Footer() {
               <li>邮箱: your-email@example.com</li>
               <li>微信: your-wechat</li>
               <li>GitHub: your-github</li>
+              <li>
+                <a href="/api/rss" className="hover:text-white transition-colors">
+                  RSS 订阅
+                </a>
+              </li>
             </ul>
           </div>
         </div>

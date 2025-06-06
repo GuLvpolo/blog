@@ -15,6 +15,7 @@ export interface Post {
   tags: string[]
   content: string
   coverImage?: string
+  readTime?: number
 }
 
 export function getPostSlugs(): string[] {
@@ -44,6 +45,7 @@ export function getPostBySlug(slug: string): Post {
     tags: data.tags || [],
     content,
     coverImage: data.coverImage,
+    readTime: data.readTime || Math.ceil(content.split(' ').length / 200), // 估算阅读时间
   }
 }
 
